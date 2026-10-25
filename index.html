@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>DC Flashcards</title>
+  <meta name="description" content="Data center site selection glossary flashcards">
+  <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="DC Cards">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="openSettings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="10" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <div class="mode-toggle" role="group" aria-label="Show first">
+      <button id="modeTerm" class="seg">Term first</button>
+      <button id="modeDef" class="seg">Definition first</button>
+    </div>
+    <div class="count" id="count" aria-live="polite"></div>
+  </header>
+
+  <main class="stage">
+    <div class="card-wrap" id="cardWrap">
+      <div class="card" id="card" role="button" tabindex="0" aria-label="Flip card">
+        <div class="face front">
+          <div class="section-label" id="frontSection"></div>
+          <div class="content" id="frontText"></div>
+          <div class="hint">Tap to flip</div>
+        </div>
+        <div class="face back">
+          <div class="section-label" id="backSection"></div>
+          <div class="content" id="backText"></div>
+        </div>
+      </div>
+      <div class="swipe-tag left" id="tagLeft">Again soon</div>
+      <div class="swipe-tag right" id="tagRight">Got it</div>
+    </div>
+    <div class="empty" id="empty" hidden>
+      <p>No sections selected.</p>
+      <button class="text-btn" id="emptySettings">Choose sections</button>
+    </div>
+  </main>
+
+  <footer class="actions">
+    <button class="action again" id="btnAgain">
+      <span class="action-title">Again soon</span>
+      <span class="action-sub">to middle</span>
+    </button>
+    <button class="action known" id="btnKnown">
+      <span class="action-title">Got it</span>
+      <span class="action-sub">to back</span>
+    </button>
+  </footer>
+
+  <div class="sheet-backdrop" id="backdrop" hidden></div>
+  <section class="sheet" id="sheet" aria-hidden="true" aria-label="Settings">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <h2>Deck</h2>
+      <button class="text-btn" id="closeSettings">Done</button>
+    </div>
+    <div class="sheet-body">
+      <div class="stats" id="stats"></div>
+      <h3>Sections</h3>
+      <div class="section-actions">
+        <button class="text-btn" id="selAll">All</button>
+        <button class="text-btn" id="selNone">None</button>
+      </div>
+      <ul class="section-list" id="sectionList"></ul>
+      <h3>Order</h3>
+      <div class="btn-row">
+        <button class="pill" id="shuffle">Shuffle deck</button>
+        <button class="pill" id="restore">Glossary order</button>
+      </div>
+      <button class="pill danger" id="reset">Reset progress</button>
+      <p class="fineprint">Tap the card to flip. Swipe right for "Got it" (sends the card to the back of the deck). Swipe left for "Again soon" (puts it in the middle so it comes back sooner). Your order and progress are saved on this device.</p>
+    </div>
+  </section>
+
+  <script src="cards.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
