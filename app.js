@@ -264,9 +264,25 @@
   $("selAll").addEventListener("click", () => setAll(true));
   $("selNone").addEventListener("click", () => setAll(false));
 
-  $("shuffle").addEventListener("click", () => {
-    shuffle(); save(); setFlipped(false, false); render(); closeSheet();
-  });
+  let toastTimer;
+  function shuffleDeck() {
+    if (busy) return;
+    shuffle(); save(); setFlipped(false, false); render();
+    wrap.style.transition = "none";
+    wrap.style.transform = "rotate(-4deg) scale(.95)";
+    void wrap.offsetWidth;
+    wrap.style.transition = "transform .3s cubic-bezier(.2,.7,.2,1)";
+    wrap.style.transform = "";
+    const toast = $("toast");
+    clearTimeout(toastTimer);
+    toast.hidden = false; toast.classList.remove("fade");
+    toastTimer = setTimeout(() => {
+      toast.classList.add("fade");
+      toastTimer = setTimeout(() => { toast.hidden = true; }, 250);
+    }, 1200);
+  }
+  $("shuffleTop").addEventListener("click", shuffleDeck);
+  $("shuffle").addEventListener("click", () => { closeSheet(); shuffleDeck(); });
   $("restore").addEventListener("click", () => {
     state.order = CARDS.map(c => c.id); save(); setFlipped(false, false); render(); closeSheet();
   });

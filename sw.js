@@ -1,5 +1,5 @@
 // Bump CACHE when any app file changes so installed copies pick up the update.
-const CACHE = "dc-flashcards-v1";
+const CACHE = "dc-flashcards-v2";
 const ASSETS = [
   "./",
   "index.html",
